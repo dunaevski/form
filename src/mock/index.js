@@ -7,6 +7,9 @@ export const mockData = {
             label: 'Фамилия',
             validation: {
                 required: true,
+                 messages: {
+                    required: 'Поле являеться обязательным'
+                }
             },
         },
         {
@@ -15,23 +18,20 @@ export const mockData = {
             label: 'Имя',
             validation: {
                 required: true,
+                 messages: {
+                    required: 'Поле являеться обязательным'
+                }
             },
         },
         {
             name: 'second_name',
             type: 'stringInput',
             label: 'Отчество',
-            validation: {
-                required: false,
-            },
         },
         {
             name: 'sex',
             type: 'select',
             label: 'Пол',
-            validation: {
-                required: false,
-            },
             options: [
                 {
                     database_name: 'm',
@@ -49,6 +49,9 @@ export const mockData = {
             label: 'Дата рождения',
             validation: {
                 required: true,
+                messages: {
+                    required: 'Поле являеться обязательным'
+                }
             }
         },
         {
@@ -58,6 +61,9 @@ export const mockData = {
             mask: '',
             validation: {
                 required: true,
+                messages: {
+                    required: 'Поле являеться обязательным'
+                }
             },
 
         },
@@ -67,23 +73,21 @@ export const mockData = {
             label: 'Email (обязательно)',
             validation: {
                 required: true,
+                 messages: {
+                    required: 'Поле являеться обязательным',
+                    match: 'Введён не корректный адрес почты'
+                }
             },
         },
         {
             name: 'address',
             type: 'stringInput',
             label: 'Адрес постоянной регистрации',
-            validation: {
-                required: false,
-            },
         },
         {
             name: 'worker_name',
             type: 'stringInput',
             label: 'Название работодателя',
-            validation: {
-                required: false,
-            },
         },
     ]
 }

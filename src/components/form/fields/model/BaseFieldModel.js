@@ -38,9 +38,23 @@ export default class BaseFormFieldModel {
      * подпись рядом с полем
      *
      * @type {string}
-     * @alias name
      */
     label;
+
+
+    /**
+     * ошибки валидации
+     *
+     * @type {object}
+     */
+    errorMessages
+
+    /**
+     * ошибка валидации
+     *
+     * @type {string}
+     */
+    errorMsg = '';
 
 
     /**
@@ -59,14 +73,23 @@ export default class BaseFormFieldModel {
      */
     mergeData(data, exclude = []) {
         _.each(data, (value, key) => {
+            if (key === 'validation') {
+                this.setValidateRules(data[key]);
+            }
             this[key] = value;
         });
-        this.setValidateRules();
     }
 
 
-    setValidateRules() {
 
+    setValidateRules({ required, messages}) {
+        if (required) {
+            this.isRequired = required
+        }
+
+        if(messages) {
+            this.errorMessages = {...messages}
+        }
     }
 
     showValidateMsg(message) {

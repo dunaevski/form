@@ -1,0 +1,17 @@
+.buttonWrap {
+  width:300px;
+  padding: 20px 20px 20px 15px;
+  display:block;
+  border:none;
+  border-radius: 5px;
+  color: white;
+
+  &:disabled {
+    background-color: gray;
+  }
+}
+
+.color_green {
+  background-color: #45B866;
+}
+

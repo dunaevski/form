@@ -1,13 +1,13 @@
 import './styles.scss'
 
 
-function StringInput({children, name}) {
+function FieldWrapper({children, errorMsg}) {
     return (
-        <div className="group">
+        <div className='fieldWrap'>
             { children }
-            <label className='label'>{name}</label>
+            <span className='errorMessage'>{errorMsg}</span>
         </div>
     );
 }
 
-export default StringInput;
+export default FieldWrapper;

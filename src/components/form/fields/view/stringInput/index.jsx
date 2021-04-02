@@ -1,5 +1,7 @@
 import {useState} from "react";
 import './styles.scss'
+import styles from './styles.scss'
+import FieldWrapper from "../../../fieldWrapper";
 
 
 function StringInput({model}) {
@@ -7,19 +9,21 @@ function StringInput({model}) {
 
     const handleChange = (e) => {
         setValue(e.target.value)
-
+        model.value = e.target.value
     }
 
     return (
-        <div className="group">
-            <input
-                type="text"
-                required
-                value={value}
-                onChange={handleChange}
-            />
-            <label>{model.label}</label>
-        </div>
+        <FieldWrapper errorMsg={model.errorMsg}>
+            <div className={styles.group}>
+                <input
+                    type="text"
+                    value={value}
+                    onChange={handleChange}
+                />
+                <label>{model.label}</label>
+            </div>
+        </FieldWrapper>
+
     );
 }
 

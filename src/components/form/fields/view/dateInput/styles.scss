@@ -3,7 +3,8 @@
 .group 			  {
   position:relative;
 }
-input 				{
+
+.dateInput {
   font-size:18px;
   background-color: #F0F0F0;
   width:300px;
@@ -15,31 +16,16 @@ input 				{
 input:focus 		{ outline:none; }
 
 /* LABEL ======================================= */
-label 				 {
+.dateLabel {
   color: #B1B1B1;
-  font-size:15px;
+  font-size:10px;
   font-weight:normal;
   position:absolute;
   pointer-events:none;
   left:15px;
-  top:20px;
+  top:4px;
   transition:0.2s ease all;
   -moz-transition:0.2s ease all;
   -webkit-transition:0.2s ease all;
 }
 
-/* active state */
-input:focus ~ label	{
-  top:4px;
-  font-size:10px;
-}
-
-@-webkit-keyframes inputHighlighter {
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-  to 	{ width:0; background:transparent; }
-}
