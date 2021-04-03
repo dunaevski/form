@@ -41,6 +41,13 @@ export default class BaseFormFieldModel {
      */
     label;
 
+    /**
+     * подпись рядом с полем
+     *
+     * @type {string}
+     */
+    pattern;
+
 
     /**
      * ошибки валидации
@@ -82,21 +89,21 @@ export default class BaseFormFieldModel {
 
 
 
-    setValidateRules({ required, messages}) {
+    setValidateRules({ required, messages, pattern}) {
         if (required) {
             this.isRequired = required
         }
-
-        if(messages) {
+        if (pattern) {
+            this.pattern = pattern;
+        }
+        if (messages) {
             this.errorMessages = {...messages}
         }
     }
 
-    showValidateMsg(message) {
-
-    }
-
-    hideValidateMsg() {
-
+    setInlineValidation(value) {
+        if (value !== '' && this.pattern && !this.pattern.test(value)) {
+            this.errorMsg = this.errorMessages.pattern;
+        }
     }
 }

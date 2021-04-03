@@ -1,30 +1,47 @@
-import {useState} from "react";
-import './styles.scss'
-import styles from './styles.scss'
+import { useState } from "react";
+import styles from "./StringInput.module.scss";
 import FieldWrapper from "../../../fieldWrapper";
+import useForceUpdate from "../../../../../helpers/index";
 
+function StringInput({ model, isFormValid }) {
+  const [value, setValue] = useState("");
+  const forceUpdate = useForceUpdate();
 
-function StringInput({model}) {
-    const [value, setValue] = useState('');
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    model.value = e.target.value;
+  };
 
-    const handleChange = (e) => {
-        setValue(e.target.value)
-        model.value = e.target.value
+  const handleBlur = (e) => {
+    model.setInlineValidation(e.target.value);
+    forceUpdate();
+  };
+
+  const handleFocus = (e) => {
+    if (model.errorMsg) {
+      model.errorMsg = "";
     }
+  };
 
-    return (
-        <FieldWrapper errorMsg={model.errorMsg}>
-            <div className={styles.group}>
-                <input
-                    type="text"
-                    value={value}
-                    onChange={handleChange}
-                />
-                <label>{model.label}</label>
-            </div>
-        </FieldWrapper>
+  let fieldStyles = styles.group;
+  if (model.errorMsg) {
+    fieldStyles += ' ' + styles.errorField;
+  }
 
-    );
+  return (
+    <FieldWrapper errorMsg={model.errorMsg}>
+      <div className={fieldStyles}>
+        <input
+          type="text"
+          value={value}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          onChange={handleChange}
+        />
+        <label>{model.label}</label>
+      </div>
+    </FieldWrapper>
+  );
 }
 
 export default StringInput;

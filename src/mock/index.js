@@ -28,57 +28,61 @@ export const mockData = {
             type: 'stringInput',
             label: 'Отчество',
         },
-        {
-            name: 'sex',
-            type: 'select',
-            label: 'Пол',
-            options: [
-                {
-                    database_name: 'm',
-                    display_name: 'Мужской'
+        [
+            {
+                name: 'sex',
+                type: 'select',
+                label: 'Пол',
+                options: [
+                    {
+                        database_name: 'm',
+                        display_name: 'Мужской'
+                    },
+                    {
+                        database_name: 'f',
+                        display_name: 'Женский'
+                    }
+                ],
+            },
+            {
+                name: 'birthday',
+                type: 'dateInput',
+                label: 'Дата рождения',
+                validation: {
+                    required: true,
+                    messages: {
+                        required: 'Поле являеться обязательным'
+                    }
                 },
-                {
-                    database_name: 'f',
-                    display_name: 'Женский'
-                }
-            ],
-        },
-        {
-            name: 'birthday',
-            type: 'dateInput',
-            label: 'Дата рождения',
-            validation: {
-                required: true,
-                messages: {
-                    required: 'Поле являеться обязательным'
-                }
-            }
-        },
-        {
-            name: 'phone',
-            type: 'maskInput',
-            label: 'Мобильный телефон',
-            mask: '',
-            validation: {
-                required: true,
-                messages: {
-                    required: 'Поле являеться обязательным'
-                }
             },
-
-        },
-        {
-            name: 'email',
-            type: 'stringInput',
-            label: 'Email (обязательно)',
-            validation: {
-                required: true,
-                 messages: {
-                    required: 'Поле являеться обязательным',
-                    match: 'Введён не корректный адрес почты'
-                }
+        ],
+        [
+            {
+                name: 'phone',
+                type: 'maskInput',
+                label: 'Мобильный телефон',
+                mask: '+7(999) 999 99 99',
+                validation: {
+                    required: true,
+                    messages: {
+                        required: 'Поле являеться обязательным'
+                    }
+                },
             },
-        },
+            {
+                name: 'email',
+                type: 'stringInput',
+                label: 'Email (обязательно)',
+                validation: {
+                    required: true,
+                    pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                    messages: {
+                        required: 'Поле являеться обязательным',
+                        pattern: 'Введён не корректный адрес почты'
+                    }
+                },
+            },
+        ],
         {
             name: 'address',
             type: 'stringInput',

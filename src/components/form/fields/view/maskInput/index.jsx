@@ -1,5 +1,6 @@
 import {useState} from "react";
 import FieldWrapper from "../../../fieldWrapper";
+import styles from "./MaskInput.module.scss"
 
 function MaskInput({model}) {
     const [value, setValue] = useState('');
@@ -9,9 +10,14 @@ function MaskInput({model}) {
         model.value = e.target.value
     }
 
+    let fieldStyles = styles.group;
+    if (model.errorMsg) {
+        fieldStyles += ' ' + styles.errorField;
+    }
+
     return (
         <FieldWrapper errorMsg={model.errorMsg}>
-            <div className="group">
+            <div className={fieldStyles}>
                 <input
                     type="text"
                     value={value}
