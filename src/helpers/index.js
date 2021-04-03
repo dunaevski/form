@@ -1,10 +1,15 @@
-import {
-    useState
-} from "react";
+import * as _ from 'lodash';
 
-function useForceUpdate() {
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue((value) => value + 1); // update the state to force render
+const getInitialForms = (fields) => {
+    const fattenFields = _.flattenDeep(fields)
+    return _.reduce(fattenFields, (initialFields, field) => {
+        initialFields[field.name] = {
+            ...field,
+            errorMsg: '',
+            isValid: true,
+        }
+        return initialFields;
+    }, {});
 }
 
-export default useForceUpdate;
+export {getInitialForms};

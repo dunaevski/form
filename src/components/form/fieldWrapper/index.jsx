@@ -1,12 +1,12 @@
-import "./styles.scss";
+import styles from "./FieldWrapper.module.scss";
 
-function FieldWrapper({ children, errorMsg }) {
-  return (
-    <div className="fieldWrap">
-      {children}
-      <span className="errorMessage">{errorMsg}</span>
-    </div>
-  );
+export default function FieldWrapper({children, errorMsg}) {
+    return (
+        <div className={styles.fieldWrap}>
+            <div className={styles.group}>
+                {children}
+            </div>
+            <span className={styles.errorMessage}>{errorMsg}</span>
+        </div>
+    )
 }
-
-export default FieldWrapper;

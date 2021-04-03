@@ -1,51 +1,60 @@
+.fieldInput {
+  font-size: 18px;
+  background-color: #F0F0F0;
+  width: 100%;
+  padding: 20px 20px 20px 15px;
+  display: block;
+  border: none;
+  border-radius: 5px;
 
-/* form starting stylings ------------------------------- */
-.group 	{
-  position:relative;
-
-  input 				{
-    font-size:18px;
-    background-color: #F0F0F0;
-    width: 100%;
-    padding: 20px 20px 20px 15px;
-    display:block;
-    border:none;
-    border-radius: 5px;
-  }
-  input:focus 		{ outline:none; }
-
-  /* LABEL ======================================= */
-  label 				 {
-    color: #B1B1B1;
-    font-size:15px;
-    font-weight:normal;
-    position:absolute;
-    pointer-events:none;
-    left:15px;
-    top:20px;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
+  &:focus {
+    outline: none;
   }
 
-  /* active state */
-  input:focus ~ label, input:not([value=""]) ~ label {
-    top:4px;
-    font-size:10px;
+  &:focus ~ label, &:not([value=""]) ~ label {
+    top: 4px;
+    font-size: 10px;
   }
-
 }
+
+.fieldStyles{
+  label {
+    color: #B1B1B1;
+    font-size: 15px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 15px;
+    top: 20px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+}
+
 .errorField {
   input {
     border: 1px red solid;
   }
 }
+
 @-webkit-keyframes inputHighlighter {
-  to 	{ width:0; background:transparent; }
+  to {
+    width: 0;
+    background: transparent;
+  }
 }
+
 @-moz-keyframes inputHighlighter {
-  to 	{ width:0; background:transparent; }
+  to {
+    width: 0;
+    background: transparent;
+  }
 }
+
 @keyframes inputHighlighter {
-  to 	{ width:0; background:transparent; }
+  to {
+    width: 0;
+    background: transparent;
+  }
 }

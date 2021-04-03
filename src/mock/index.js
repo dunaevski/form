@@ -11,9 +11,10 @@ export const mockData = {
                     required: 'Поле являеться обязательным'
                 }
             },
+            value: '',
         },
         {
-            name: 'name',
+            name: 'first_name',
             type: 'stringInput',
             label: 'Имя',
             validation: {
@@ -22,11 +23,13 @@ export const mockData = {
                     required: 'Поле являеться обязательным'
                 }
             },
+            value: '',
         },
         {
             name: 'second_name',
             type: 'stringInput',
             label: 'Отчество',
+            value: '',
         },
         [
             {
@@ -43,6 +46,7 @@ export const mockData = {
                         display_name: 'Женский'
                     }
                 ],
+                value: 'm',
             },
             {
                 name: 'birthday',
@@ -54,12 +58,13 @@ export const mockData = {
                         required: 'Поле являеться обязательным'
                     }
                 },
+                value: ''
             },
         ],
         [
             {
                 name: 'phone',
-                type: 'maskInput',
+                type: 'stringInput',
                 label: 'Мобильный телефон',
                 mask: '+7(999) 999 99 99',
                 validation: {
@@ -68,6 +73,7 @@ export const mockData = {
                         required: 'Поле являеться обязательным'
                     }
                 },
+                value: ''
             },
             {
                 name: 'email',
@@ -81,17 +87,20 @@ export const mockData = {
                         pattern: 'Введён не корректный адрес почты'
                     }
                 },
+                value: '',
             },
         ],
         {
             name: 'address',
             type: 'stringInput',
             label: 'Адрес постоянной регистрации',
+            value: '',
         },
         {
             name: 'worker_name',
             type: 'stringInput',
             label: 'Название работодателя',
+            value: '',
         },
     ]
 }

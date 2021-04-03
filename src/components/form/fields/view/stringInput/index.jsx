@@ -1,47 +1,43 @@
-import { useState } from "react";
 import styles from "./StringInput.module.scss";
 import FieldWrapper from "../../../fieldWrapper";
-import useForceUpdate from "../../../../../helpers/index";
 
-function StringInput({ model, isFormValid }) {
-  const [value, setValue] = useState("");
-  const forceUpdate = useForceUpdate();
+function StringInput({value, name, isValid, label, errorMsg, changed, validation, checkValidation}) {
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    model.value = e.target.value;
-  };
+    const handleBlur = (e) => {
+        if (name === 'email' && !validation.pattern.test(value)) {
+            checkValidation(name, false, validation.messages.pattern);
+        }
+    };
 
-  const handleBlur = (e) => {
-    model.setInlineValidation(e.target.value);
-    forceUpdate();
-  };
+    const handleFocus = () => {
+        checkValidation(name, true, '');
+    };
 
-  const handleFocus = (e) => {
-    if (model.errorMsg) {
-      model.errorMsg = "";
+    const handleChange = e => {
+        const _value = e.target.value;
+        changed(_value, name)
     }
-  };
 
-  let fieldStyles = styles.group;
-  if (model.errorMsg) {
-    fieldStyles += ' ' + styles.errorField;
-  }
+    let fieldStyles = [styles.fieldStyles];
+    if (!isValid) {
+        fieldStyles.push(styles.errorField);
+    }
 
-  return (
-    <FieldWrapper errorMsg={model.errorMsg}>
-      <div className={fieldStyles}>
-        <input
-          type="text"
-          value={value}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          onChange={handleChange}
-        />
-        <label>{model.label}</label>
-      </div>
-    </FieldWrapper>
-  );
+    return (
+        <FieldWrapper errorMsg={errorMsg}>
+            <div className={fieldStyles.join(' ')}>
+                <input
+                    className={styles.fieldInput}
+                    type="text"
+                    value={value}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
+                    onChange={handleChange}
+                />
+                <label>{label}</label>
+            </div>
+        </FieldWrapper>
+    );
 }
 
 export default StringInput;

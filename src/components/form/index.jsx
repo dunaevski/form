@@ -1,86 +1,71 @@
 import styles from "./Form.module.scss";
 import FieldFactory from "./fieldFactory/index";
 import Button from "../button";
-import { useState, useEffect } from "react";
-import FormModel from "./FormModel";
-import _ from "lodash";
+import {useForm} from '../../hook/useForm'
+import {getInitialForms} from "../../helpers";
 
-export default function Form({ title, fields }) {
-  const [isLoading, setLoading] = useState(false);
-  const [formModel, setFormModel] = useState({});
-  const [isFormValid, setValidForm] = useState(true);
+export default function Form({title, fields}) {
+    const initialForm = getInitialForms(fields);
+    const {state, isLoading, submitHandler, changeHandler, changeValidField} = useForm(initialForm, values => console.log(values));
 
-  useEffect(() => {
-    setFormModel(new FormModel());
-  }, []);
+    const onClick = (e) => {
+        e.preventDefault();
+        submitHandler(e);
+    };
 
-  const onClick = (e) => {
-    e.preventDefault();
-    saveForm();
-  };
+    const getNode = fields => {
+        return fields.map(field => {
+            if (Array.isArray(field)) {
+                return (
+                    <div key={field.name} className={styles.flexContainer}>
+                        {getChildNode(field)}
+                    </div>
+                );
+            }
 
-  const saveForm = () => {
-    setLoading(true);
+            const fieldProps = {
+                key: field.name,
+                changed: changeHandler,
+                checkValidation: changeValidField,
+                ...state[field.name]
+            }
+            return (
+                <FieldFactory {...fieldProps} />
+            );
+        });
+    };
 
-    const isValidForm = formModel.validationForm();
-    setValidForm(isValidForm);
+    const getChildNode = (fields) => {
+        return fields.map((field) => {
+            const fieldProps = {
+                changed: changeHandler,
+                checkValidation: changeValidField,
+                ...state[field.name]
+            }
 
-    if (isValidForm) {
-      setTimeout(() => {
-        alert("to see data go into console");
-        console.log(formModel.setializeFields());
-        setLoading(false);
-      }, 2000);
-    } else {
-      setLoading(false);
-    }
-  };
+            return (
+                <div key={field.name} className={styles.splitSection}>
+                    <FieldFactory {...fieldProps} />
+                </div>
+            );
+        });
+    };
 
-  const getNode = (fields, isChild = false) => {
-    return fields.map((field, i) => {
-      if (isChild) {
-        return getChildNode(field, i);
-      }
-      if (Array.isArray(field)) {
-        return (
-          <div className={styles.flexContainer}>{getNode(field, true)}</div>
-        );
-      }
-      const fieldModel = formModel.getFieldsModelByType(field);
-      console.log(isFormValid, fieldModel.errorMsg);
-      return (
-        <FieldFactory key={i} model={fieldModel} isFormValid={isFormValid} />
-      );
-    });
-  };
-
-  const getChildNode = (field, i) => {
-    const fieldModel = formModel.getFieldsModelByType(field);
-    console.log(isFormValid, fieldModel.errorMsg);
     return (
-      <div className={styles.splitSection}>
-        <FieldFactory key={i} model={fieldModel} isFormValid={isFormValid} />
-      </div>
+        <div>
+            <h2 className={styles.headerTitle}> {title}</h2>
+            <form className={styles.formContainer}>
+                {getNode(fields)}
+                <Button
+                    className={styles.buttonStyle}
+                    title="Сохранить"
+                    color={"green"}
+                    disabled={isLoading}
+                    onClick={onClick}
+                >
+                    {isLoading ? "Отправка" : "Сохранить"}
+                </Button>
+            </form>
+        </div>
     );
-  };
-
-  if (_.isEmpty(formModel)) return null;
-
-  return (
-    <div>
-      <h2 className={styles.headerTitle}> {title}</h2>
-      <form className={styles.formContainer}>
-        {getNode(fields)}
-        <Button
-          className={styles.buttonStyle}
-          title="Сохранить"
-          color={"green"}
-          disabled={isLoading || !formModel.isValid}
-          onClick={onClick}
-        >
-          {isLoading ? "Отправка" : "Сохранить"}
-        </Button>
-      </form>
-    </div>
-  );
 }
