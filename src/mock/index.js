@@ -64,9 +64,11 @@ export const mockData = {
         [
             {
                 name: 'phone',
-                type: 'stringInput',
+                type: 'maskInput',
                 label: 'Мобильный телефон',
-                mask: '+7(999) 999 99 99',
+                format: '+# (###) ###-##-##',
+                placeholder: '+7 (999) 999-99-99',
+                mask: '_',
                 validation: {
                     required: true,
                     messages: {
