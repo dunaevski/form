@@ -23,7 +23,6 @@ const useForm = (initialValues, onSubmit) => {
         let isFormValid = true;
         _.forEach(state, field => {
             if (field.validation && field.validation.required && field.value === '') {
-                if(field.name === 'birthday') debugger
                 changeValidField(field.name, false, field.validation.messages.required)
                 isFormValid = false;
             }
@@ -52,8 +51,6 @@ const useForm = (initialValues, onSubmit) => {
     return {state, isLoading, submitHandler, changeHandler, changeValidField}
 }
 
-
-//Our custom hook also needs a reducer so I've included a very simple one here
 function formReducer(prevState, {name, updatedElement}) {
     return {...prevState, [name]: updatedElement};
 }
